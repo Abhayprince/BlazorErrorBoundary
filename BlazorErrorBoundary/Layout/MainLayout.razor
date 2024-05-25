@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+<ErrorBoundary @ref="_errorBoundary" Context="ex">
+    <ChildContent>
+        <MainLayoutContent>
+            @Body
+        </MainLayoutContent>
+    </ChildContent>
+    <ErrorContent>
+        @* <div class="d-grid" style="place-content: center">
+            <h3 class="text-danger">Something went wrong</h3>
+        </div> *@
+
+        @* <ErrorBoundaryAlertComponent OnHandle="ResetErrorBoundary" Error="ex" /> *@
+
+        <MainLayoutContent>
+            @Body
+        </MainLayoutContent>
+        <ErrorBoundaryContent OnHandle="ResetErrorBoundary" Error="ex" />
+    </ErrorContent>
+</ErrorBoundary>
+@code{
+    private ErrorBoundary? _errorBoundary;
+
+    private void ResetErrorBoundary() => _errorBoundary?.Recover();
+}

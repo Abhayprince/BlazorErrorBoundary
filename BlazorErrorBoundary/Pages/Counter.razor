@@ -1,0 +1,36 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<hr />
+<p>Click on the above [Click Me] button,</p>
+<p>to introduce an error and handle that gracefully and show a customized UI popup</p>
+
+<hr />
+<p>Prev Count Number of Digit: @_prevCountNumberOfDigits</p>
+<p>Current Count Number of Digit: @_currentCountNumberOfDigits</p>
+
+@code {
+    private int? currentCount;
+
+    private int _prevCountNumberOfDigits;
+    private int _currentCountNumberOfDigits;
+
+    private void IncrementCount()
+    {
+        _prevCountNumberOfDigits = currentCount.Value.ToString().Length;
+
+        if (currentCount is null)
+            currentCount = 0;
+
+        currentCount++;
+
+        _currentCountNumberOfDigits = currentCount.ToString().Length;
+    }
+}

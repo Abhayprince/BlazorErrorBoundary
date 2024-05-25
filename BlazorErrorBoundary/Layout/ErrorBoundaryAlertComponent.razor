@@ -1,0 +1,16 @@
+﻿@inject IJSRuntime JsRuntime
+
+@code {
+    [Parameter, EditorRequired]
+    public Exception Error { get; set; } = new();
+
+    [Parameter, EditorRequired]
+    public EventCallback OnHandle { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // await JsRuntime.InvokeVoidAsync("alert", "Something went wrong");
+        await JsRuntime.InvokeVoidAsync("alert", $"Something went wrong. {Error.Message}");
+        await OnHandle.InvokeAsync();
+    }
+}
